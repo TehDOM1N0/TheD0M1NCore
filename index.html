@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>што</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<link rel="shorcut icon" href="1.png">
+	</style>
+</head>
+<body style="background-color: #49423D; color: white;" title="НЕ НОЖИМАЙ НА КАРТЕНКИ!">
+
+
+	<div style="height: 50px; width: 50px; background-color: blue;"></div>
+	<div style="height: 50px; width: 50px; background-color: yellow;";></div>
+
+	<script type="text/javascript">
+		function incSize(event) {
+			var width = Number(event.target.style.width.substring(0, event.target.style.width.length - 2)) // number, потому шо изначально текстом становится, event.target - клик на зону
+			event.target.style.width = (width + 15) + "px";
+			//$(event.target).unbind(); // удаление bind шобы ток 1 раз можно было
+			$("<p>КООРДИНАТЫ БАХМУТСКИХ СОЛДАТ ВСРФ1!: x - " + event.screenX + ", y - " + event.screenY + "</p>").insertAfter('div:last');
+		};
+
+		$(document).ready(function() { // ready, срабатывает когда сайт фулл загружен
+			$("div").bind("click", incSize); // bind обработчик событий, но не видит заранее созданные вещички
+			$(document).on("click", "p", function () { // можно тоже просто incSize, "p" клик выдается alert
+				alert("ДЯ СЛАВА УКРАИНЕ!")
+			})
+		});
+	</script>
+
+
+
+	<div id="comments">
+		<p>Комментарий №1</p>
+		<p>Комментарий №2</p>
+		<p>Комментарий №3</p>
+	</div>
+
+	<form name="form" id="form" action="#" method="post" style="display: none;" onsubmit="return false">
+		<textarea id="textarea" name="comment" cols="30" rows="10"></textarea><br>
+		<input type="submit" name="send" value="Добавить комментарий" id="done">
+	</form>
+
+	<a href="#" onclick="return false" id="add_comment">Добавить комментарий</a><br>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(document).on("click", "#add_comment", function () {
+				var form = $("form[name='form']");
+				form.css("display", "block");
+				$("#add_comment").replaceWith(form); // лучше юзать empty или remove
+			}); // клик по add_comment
+
+			$(document).on("click", "input[name='send']", function () {
+				var comment = $("textarea[name='comment']").val();
+				alert("апхчимба");
+				$("<p>" + comment + "</p>").appendTo("#comments")
+			})
+		});
+	</script>
+
+
+
+
+	<script type="text/javascript">
+		function hideComments() {
+			$("#comments").fadeOut(1000, function () { // скрыть
+				$("#hide").hide();
+				$("#show").show();
+			});
+		};
+
+		function showComments() { // показать
+			$("#comments").fadeIn(1000, function () {
+				$("#hide").show();
+				$("#show").hide();
+			});
+		};
+
+		//function showComments() {
+		//	$("#hide").show();
+		//	$("#show").hide();
+		//  $("#comments").show(1000); // show - показат, hide - скрыт, slideUp/Down - без затухания, fadeOut/In - без анимации просто затухания
+		//}
+
+		$(document).ready(function () {
+			$("#hide").bind("click", hideComments); // можно через .on();
+			$("#show").bind("click", showComments);
+		});
+	</script>
+
+	<a href="#" id="hide" onclick="return false">Скрыть</a>
+	<a href="#" id="show" style="display: none;" onclick="return false">Показать</a><br><br><br>
+
+
+
+
+	<h1>
+		<img src="1.png" alt="Изображение" title="НЕ НОЖИМАЙ НА МЕНЯ!" id="img" width="200">
+	</h1>
+	<script type="text/javascript">
+		$(document).ready(
+			function () {
+				$("img").bind("click", function (event) { // необходимо event ибо в jQuery объект
+					$(event.target).parent().css("text-align", "center"); // event.target сам img
+					alert("шт, ты же знаешь, мы такое не лубим");
+					alert("у тебя big problems");
+					$(event.target).animate({
+						width: $(event.target).width() * 10
+						//height: $(event.target).height() * 10 // не робет(((
+					}, 8000);
+					setTimeout(alert("мы знать твой адресс...."), 8000) // тоже чота не работать(( (ну то ест работать, но не через 8 секондс((()
+				});
+			});
+	</script>
+
+</body>
+</html>
